@@ -250,7 +250,7 @@ if (mqdes == -1) {
 }
 if (mq_send(mqdes, "Hello, world!", 13, 0) == -1) {
     if (errno == EAGAIN) {
-        printf("Queue is full, try again later.\n");
+        printf("Queue is full, try again later. n");
     } else {
         perror("mq_send");
     }
@@ -310,7 +310,7 @@ mqd_t mqdes = mq_open("/myqueue", O_RDONLY | O_NONBLOCK);
 char buffer[128];
 if (mq_receive(mqdes, buffer, sizeof(buffer), NULL) == -1) {
     if (errno == EAGAIN) {
-        printf("Queue is empty, try again later.\n");
+        printf("Queue is empty, try again later. n");
     } else {
         perror("mq_receive");
     }
@@ -401,7 +401,6 @@ Message queues provide an effective IPC mechanism, allowing processes to communi
 ## Table of Contents
 
 - [Overview of MsgQ as IPC](#overview-of-msgq-as-ipc)
-- [Monitoring a Message Queue using `fd_set`](#monitoring-a-message-queue-using-fd_set)
 - [Multiple Senders, Single Receiver Concept](#multiple-senders-single-receiver-concept)
 - [Examples and Usage](#examples-and-usage)
 - [Additional Information](#additional-information)
@@ -418,7 +417,6 @@ Message queues offer a robust mechanism for inter-process communication (IPC) in
 - [Introduction to MsgQ](#introduction-to-msgq)
 - [Setting Up a Message Queue](#setting-up-a-message-queue)
 - [Sending and Receiving Messages](#sending-and-receiving-messages)
-- [Monitoring with `fd_set`](#monitoring-with-fd_set)
 - [Closing, Unlinking, and Cleaning Up](#closing-unlinking-and-cleaning-up)
 - [Multiple Senders and a Single Receiver Concept](#multiple-senders-and-a-single-receiver-concept)
 - [Best Practices and Recommendations](#best-practices-and-recommendations)
@@ -513,30 +511,12 @@ bytesRead = mq_receive(mqdes, buffer, sizeof(buffer), NULL);
 if (bytesRead == -1) {
     perror("mq_receive");
 } else {
-    printf("Received: %s\n", buffer);
+    printf("Received: %s n", buffer);
 }
 ```
 
 ---
 
-## Monitoring with `fd_set`
-
-While standard POSIX message queues do not directly support `select()`, you can integrate MsgQ with other IPC mechanisms like sockets or pipes for monitoring.
-
-For MsgQ alternatives that support `select()`, you can utilize:
-
-- `fd_set`: Represents a set of file descriptors.
-- `FD_ZERO`: Clears an `fd_set`.
-- `FD_ISSET`: Checks if a specific descriptor
-
-
----
-
-## Examples and Usage
-
-To illustrate the use of MsgQ as an IPC, you might include code snippets and examples. However, due to the limitation mentioned above, direct integration of `fd_set`, `FD_ZERO`, and `FD_ISSET` with MsgQ may not be straightforward.
-
----
 
 ## Additional Information
 
@@ -549,3 +529,54 @@ If you need more comprehensive examples or have other questions regarding IPC or
 
 ## Code Walk and Implementation
 For a detailed walk-through and practical implementation of using MsgQs for IPC, refer to the examples folder in this repository. We'll go step-by-step through creating, sending, and receiving messages in different processes.
+
+ ## Compilation Instructions
+
+ ### Prerequisites
+
+ - Ensure you have  `gcc ` (or relevant compiler/tool) installed. If not, install it:
+
+   ```
+  sudo apt-get install gcc  # For Debian/Ubuntu-based systems
+   ```
+
+ 
+ ### Steps
+
+1.  **Clone the Repository **:
+   
+   Use git to clone the repository to your local machine:
+    ```
+   git clone https://github.com/ANSANJAY/ipc-message-queue.git
+    ```
+
+
+## Compilation Instructions
+
+To compile the server, run:
+
+```
+make server
+```
+
+To compile the receiver, run:
+
+```
+make receiver
+```
+
+4.  **Run the Compiled Code **:
+
+   After successfully compiling, run the code reciver and sender in separate terminal windows
+    
+    ```bash
+   ./reciever 
+    ```
+
+    ```bash
+  ./sender
+  ```
+
+  Expected output:
+
+![Expected Output Screenshot](./Screenshot%20from%202023-08-22%2001-04-11.png)
