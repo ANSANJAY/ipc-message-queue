@@ -536,9 +536,9 @@ For a detailed walk-through and practical implementation of using MsgQs for IPC,
 
  - Ensure you have  `gcc ` (or relevant compiler/tool) installed. If not, install it:
 
-   ```
+  ```
   sudo apt-get install gcc  # For Debian/Ubuntu-based systems
-   ```
+  ```
 
  
  ### Steps
@@ -546,9 +546,10 @@ For a detailed walk-through and practical implementation of using MsgQs for IPC,
 1.  **Clone the Repository **:
    
    Use git to clone the repository to your local machine:
-    ```
+
+  ```
    git clone https://github.com/ANSANJAY/ipc-message-queue.git
-    ```
+  ```
 
 
 ## Compilation Instructions
@@ -569,11 +570,11 @@ make receiver
 
    After successfully compiling, run the code reciver and sender in separate terminal windows
     
-    ```bash
+  ```bash
    ./reciever 
-    ```
+  ```
 
-    ```bash
+  ```bash
   ./sender
   ```
 
